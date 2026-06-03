@@ -1,0 +1,70 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+// prisma/schema.prisma
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id              String       @id @default(cuid())
+  clerkId         String       @unique
+  email           String       @unique
+
+  streak          Int          @default(0)
+  bestStreak      Int          @default(0)
+  lastSubmittedAt DateTime?
+
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  submissions     Submission[]
+  challenges      Challenge[]
+
+  @@index([clerkId])
+}
+
+model Submission {
+  id        String   @id @default(cuid())
+  userId    String
+
+  language  String
+  code      String   @db.Text
+
+  score     Float
+  feedback  Json
+
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challenge Challenge?
+
+  @@index([userId])
+  @@index([userId, createdAt(sort: Desc)])
+}
+
+model Challenge {
+  id           String   @id @default(cuid())
+  userId       String
+
+  submissionId String?  @unique
+  submission   Submission? @relation(fields: [submissionId], references: [id])
+
+  title        String
+  difficulty   String   // "Beginner" | "Intermediate" | "Advanced"
+  description  String   @db.Text
+  hints        Json     // string[]
+
+  language     String
+  completed    Boolean  @default(false)
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, completed])
+}

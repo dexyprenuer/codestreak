@@ -1,0 +1,108 @@
+
+> codestreak@0.1.0 dev
+> next dev
+
+  ▲ Next.js 15.0.0-rc.0
+  - Local:        http://localhost:3000
+  - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 10.7s
+ ○ Compiling /src/middleware ...
+ ✓ Compiled /src/middleware in 10.9s (187 modules)
+ ○ Compiling /analyze ...
+Watchpack Error (watcher): Error: EACCES: permission denied, watch '/data/data'
+Watchpack Error (watcher): Error: EACCES: permission denied, watch '/data'
+Watchpack Error (watcher): Error: EACCES: permission denied, watch '/'
+Watchpack Error (initial scan): Error: EACCES: permission denied, scandir '/data/data'
+Watchpack Error (initial scan): Error: EACCES: permission denied, scandir '/data'
+Watchpack Error (initial scan): Error: EACCES: permission denied, scandir '/'
+ ✓ Compiled /analyze in 39s (1213 modules)
+Watchpack Error (watcher): Error: EACCES: permission denied, watch '/data/data'
+Watchpack Error (watcher): Error: EACCES: permission denied, watch '/data'
+Watchpack Error (watcher): Error: EACCES: permission denied, watch '/'
+Watchpack Error (initial scan): Error: EACCES: permission denied, scandir '/data/data'
+Watchpack Error (initial scan): Error: EACCES: permission denied, scandir '/data'
+Watchpack Error (initial scan): Error: EACCES: permission denied, scandir '/'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled in 18.3s (696 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled in 1854ms (508 modules)
+ GET /analyze 200 in 61829ms
+ ○ Compiling /api/analyze ...
+ ✓ Compiled /api/analyze in 2.9s (732 modules)
+[CodeStreak AI] Sending request to Primary Model: deepseek/deepseek-chat:free
+[CodeStreak AI] Primary model route failed: Error: OpenRouter error status [404]: {"error":{"message":"No endpoints found for deepseek/deepseek-chat:free.","code":404},"user_id":"user_3BG23UQxgliZO1vXv709KGMKkl7"}
+    at callOpenRouter (webpack-internal:///(rsc)/./src/server/services/analysis.service.ts:28:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async analyzeCode (webpack-internal:///(rsc)/./src/server/services/analysis.service.ts:59:25)
+    at async analyzeCodeAction (webpack-internal:///(rsc)/./src/server/actions/analyze.action.ts:89:20)
+    at async POST (webpack-internal:///(rsc)/./src/app/api/analyze/route.ts:34:20)
+    at async /data/data/com.termux/files/home/codestreak/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:63352
+    at async eP.execute (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:54549)
+    at async eP.handle (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:64693)
+    at async doRender (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:1419:42)
+    at async responseGenerator (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:1652:28)
+    at async DevServer.renderToResponseWithComponentsImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:1665:28)
+    at async DevServer.renderPageComponent (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:1978:24)
+    at async DevServer.renderToResponseImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:2016:32)
+    at async DevServer.pipeImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:908:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/next-server.js:273:17)
+    at async DevServer.handleRequestImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:804:17)
+    at async /data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/trace/trace.js:157:20)
+    at async DevServer.handleRequest (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/lib/router-server.js:175:21)
+    at async handleRequest (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/lib/router-server.js:354:24)
+    at async requestHandlerImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/lib/router-server.js:378:13)
+    at async Server.requestListener (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/lib/start-server.js:142:13)
+[CodeStreak AI] Attempting fallback model: deepseek/deepseek-r1:free
+[CodeStreak AI] Fallback model route failed as well: Error: OpenRouter error status [404]: {"error":{"message":"No endpoints found for deepseek/deepseek-r1:free.","code":404},"user_id":"user_3BG23UQxgliZO1vXv709KGMKkl7"}
+    at callOpenRouter (webpack-internal:///(rsc)/./src/server/services/analysis.service.ts:28:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async analyzeCode (webpack-internal:///(rsc)/./src/server/services/analysis.service.ts:69:29)
+    at async analyzeCodeAction (webpack-internal:///(rsc)/./src/server/actions/analyze.action.ts:89:20)
+    at async POST (webpack-internal:///(rsc)/./src/app/api/analyze/route.ts:34:20)
+    at async /data/data/com.termux/files/home/codestreak/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:63352
+    at async eP.execute (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:54549)
+    at async eP.handle (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:64693)
+    at async doRender (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:1419:42)
+    at async responseGenerator (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:1652:28)
+    at async DevServer.renderToResponseWithComponentsImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:1665:28)
+    at async DevServer.renderPageComponent (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:1978:24)
+    at async DevServer.renderToResponseImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:2016:32)
+    at async DevServer.pipeImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:908:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/next-server.js:273:17)
+    at async DevServer.handleRequestImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:804:17)
+    at async /data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/trace/trace.js:157:20)
+    at async DevServer.handleRequest (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/lib/router-server.js:175:21)
+    at async handleRequest (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/lib/router-server.js:354:24)
+    at async requestHandlerImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/lib/router-server.js:378:13)
+    at async Server.requestListener (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/lib/start-server.js:142:13)
+AI analysis failed: Error: Both primary and fallback AI services failed to analyze code.
+    at analyzeCode (webpack-internal:///(rsc)/./src/server/services/analysis.service.ts:78:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async analyzeCodeAction (webpack-internal:///(rsc)/./src/server/actions/analyze.action.ts:89:20)
+    at async POST (webpack-internal:///(rsc)/./src/app/api/analyze/route.ts:34:20)
+    at async /data/data/com.termux/files/home/codestreak/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:63352
+    at async eP.execute (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:54549)
+    at async eP.handle (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:64693)
+    at async doRender (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:1419:42)
+    at async responseGenerator (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:1652:28)
+    at async DevServer.renderToResponseWithComponentsImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:1665:28)
+    at async DevServer.renderPageComponent (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:1978:24)
+    at async DevServer.renderToResponseImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:2016:32)
+    at async DevServer.pipeImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:908:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/next-server.js:273:17)
+    at async DevServer.handleRequestImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/base-server.js:804:17)
+    at async /data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/trace/trace.js:157:20)
+    at async DevServer.handleRequest (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/lib/router-server.js:175:21)
+    at async handleRequest (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/lib/router-server.js:354:24)
+    at async requestHandlerImpl (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/lib/router-server.js:378:13)
+    at async Server.requestListener (/data/data/com.termux/files/home/codestreak/node_modules/next/dist/server/lib/start-server.js:142:13)
+ POST /api/analyze 400 in 7974ms

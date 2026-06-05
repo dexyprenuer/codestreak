@@ -7,43 +7,48 @@ import ScoreTrend from '@/components/dashboard/ScoreTrend';
 import Link from 'next/link';
 
 async function getDashboardData(clerkId: string) {
-  let user = await prisma.user.findUnique({
-    where: { clerkId },
-    include: {
-      submissions: { orderBy: { createdAt: 'desc' }, take: 7, select: { score: true, createdAt: true } },
-      challenges: { where: { completed: false }, orderBy: { createdAt: 'desc' }, take: 1 },
-    },
-  });
-
-  if (!user) {
-    const clerkUser = await clerkClient.users.getUser(clerkId);
-    const email = clerkUser.emailAddresses[0]?.emailAddress || `${clerkId}@temp.com`;
-    user = await prisma.user.create({
-      data: { clerkId, email, streak: 0, bestStreak: 0 },
+  try {
+    let user = await prisma.user.findUnique({
+      where: { clerkId },
       include: {
         submissions: { orderBy: { createdAt: 'desc' }, take: 7, select: { score: true, createdAt: true } },
         challenges: { where: { completed: false }, orderBy: { createdAt: 'desc' }, take: 1 },
       },
     });
+
+    if (!user) {
+      const clerkUser = await clerkClient.users.getUser(clerkId);
+      const email = clerkUser.emailAddresses[0]?.emailAddress || `${clerkId}@temp.com`;
+      user = await prisma.user.create({
+        data: { clerkId, email, streak: 0, bestStreak: 0 },
+        include: {
+          submissions: { orderBy: { createdAt: 'desc' }, take: 7, select: { score: true, createdAt: true } },
+          challenges: { where: { completed: false }, orderBy: { createdAt: 'desc' }, take: 1 },
+        },
+      });
+    }
+
+    const totalSubmissions = await prisma.submission.count({ where: { userId: user.id } });
+    const challengesCompleted = await prisma.challenge.count({ where: { userId: user.id, completed: true } });
+    const challengesTotal = await prisma.challenge.count({ where: { userId: user.id } });
+    const avgScoreAgg = await prisma.submission.aggregate({ where: { userId: user.id }, _avg: { score: true } });
+    const recentScores = user.submissions.map(s => s.score).reverse();
+
+    const stats: DashboardStats = {
+      streak: user.streak,
+      bestStreak: user.bestStreak,
+      totalSubmissions,
+      averageScore: avgScoreAgg._avg.score || 0,
+      challengesCompleted,
+      challengesTotal,
+      recentScores,
+    };
+
+    return { user, stats, activeChallenge: user.challenges[0] || null };
+  } catch (error) {
+    console.error('[getDashboardData]', error);
+    throw new Error('Failed to load dashboard data');
   }
-
-  const totalSubmissions = await prisma.submission.count({ where: { userId: user.id } });
-  const challengesCompleted = await prisma.challenge.count({ where: { userId: user.id, completed: true } });
-  const challengesTotal = await prisma.challenge.count({ where: { userId: user.id } });
-  const avgScoreAgg = await prisma.submission.aggregate({ where: { userId: user.id }, _avg: { score: true } });
-  const recentScores = user.submissions.map(s => s.score).reverse();
-
-  const stats: DashboardStats = {
-    streak: user.streak,
-    bestStreak: user.bestStreak,
-    totalSubmissions,
-    averageScore: avgScoreAgg._avg.score || 0,
-    challengesCompleted,
-    challengesTotal,
-    recentScores,
-  };
-
-  return { user, stats, activeChallenge: user.challenges[0] || null };
 }
 
 export default async function DashboardPage() {
@@ -81,7 +86,7 @@ export default async function DashboardPage() {
       </div>
       {activeChallenge && (
         <div className="glass-card-strong rounded-2xl p-6 border border-violet-500/20 shadow-glow-purple animate-fade-up">
-          <h3 className="text-sm font-medium text-violet-300">🔥 Active Challenge</h3>
+          <h3 className="text-sm font-medium text-violet-300">🔥 AI Active Challenge</h3>
           <p className="text-xs text-zinc-400 mt-1">Continue where you left off</p>
           <h3 className="text-xl font-semibold mt-4">{activeChallenge.title}</h3>
           <p className="text-zinc-400 mt-2">{activeChallenge.description}</p>
